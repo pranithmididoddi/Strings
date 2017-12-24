@@ -1,3 +1,7 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
 public class LeetcodeClass {
 
 
@@ -49,8 +53,11 @@ public class LeetcodeClass {
 
     public static void main(String[] args){
 
-        System.out.println(isAbbreviated("",""));
+        /**System.out.println(isAbbreviated("",""));
         System.out.println(getDenomination(1.65));
+        System.out.println(compressString("aaabbccc"));**/
+
+        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
 
     }
 
@@ -74,5 +81,47 @@ public class LeetcodeClass {
         }
 
         return sb.toString();
+    }
+
+    public static String compressString(String value){
+
+        char[] myarray=value.toCharArray();
+        int count=1;
+        char last=myarray[0];
+        StringBuilder sb=new StringBuilder();
+
+        for(int i=1;i<myarray.length;i++){
+            if(myarray[i]==myarray[i-1]){
+                count++;
+            }else{
+                sb.append(myarray[i-1]+""+count);
+                count=1;
+            }
+            last=myarray[i];
+        }
+        sb.append(last+""+count);
+
+        return sb.toString().length()>value.length()?value:sb.toString();
+    }
+
+    public static boolean isPalindrome(String s) {
+
+        String value=s.replaceAll("[^a-zA-Z0-9]","").toLowerCase();
+        char[] myarray=value.toCharArray();
+        int i=0,j=myarray.length-1;
+
+        Stack<Character> stack=new Stack<>();
+        System.out.println(new String(myarray));
+
+        while(i<j) {
+
+            if (myarray[i] != myarray[j]) {
+                return false;
+            } else {
+                i++;
+                j--;
+            }
+        }
+        return true;
     }
 }
